@@ -161,7 +161,7 @@ function MapView({ aqi, hotspots, layer }) {
   useEffect(() => {
     if (mapRef.current) return;
     const map = L.map("map", { zoomControl: true }).setView([22.8, 80.5], 5);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
       maxZoom: 18,
       attribution: "&copy; OpenStreetMap contributors",
     }).addTo(map);
