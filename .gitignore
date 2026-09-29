@@ -1,2 +1,25 @@
-.venv
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment secrets
 .env
+.env.*
+!.env.example
+
+# Local databases and generated artifacts
+*.sqlite3
+*.db
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# OS / editor
+.DS_Store
+.vscode/
