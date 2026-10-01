@@ -1,5 +1,8 @@
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from app.services.action_plan import build_action_plan
 from app.services.aqi_model import predict_surface_aqi
@@ -93,3 +96,14 @@ def action_plan() -> dict:
     aqi = predict_surface_aqi()
     hotspots_payload = detect_hcho_hotspots()
     return build_action_plan(aqi["features"], hotspots_payload["features"])
+
+
+BASE_DIR = Path(__file__).resolve().parent
+FRONTEND_DIR = BASE_DIR.parent.parent / "frontend"
+
+if not FRONTEND_DIR.exists():
+    FRONTEND_DIR = BASE_DIR.parent / "frontend"
+
+if FRONTEND_DIR.exists():
+    app.mount("/assets", StaticFiles(directory=FRONTEND_DIR / "assets"), name="assets")
+    app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="static")
